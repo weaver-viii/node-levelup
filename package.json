@@ -29,6 +29,7 @@
       , "concat-stream"       : "~0.1.1"
       , "simple-bufferstream" : "~0.0.2"
       , "xtend"               : "~2.0.3"
+      , "externr"             : "~0.0.1"
     }
   , "devDependencies" : {
         "buster"          : "*"
