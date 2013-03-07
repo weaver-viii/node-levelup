@@ -21,18 +21,21 @@
       , "storage"
       , "json"
     ]
-  , "version"         : "0.7.0-b00"
+  , "version"         : "0.7.0-b01"
   , "main"            : "lib/levelup.js"
   , "dependencies"    : {
-        "leveldown"           : "~0.1.2"
-      , "errno"               : "~0.0.3"
+        "errno"               : "~0.0.3"
       , "concat-stream"       : "~0.1.1"
       , "simple-bufferstream" : "~0.0.2"
       , "xtend"               : "~2.0.3"
       , "externr"             : "~0.0.1"
     }
+  , "peerDependencies" : {
+        "leveldown"       : "~0.2.0-b01"
+    }
   , "devDependencies" : {
-        "buster"          : "*"
+        "leveldown"       : "~0.2.0-b01"
+      , "buster"          : "*"
       , "rimraf"          : "*"
       , "async"           : "*"
       , "fstream"         : "*"
