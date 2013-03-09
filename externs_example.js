@@ -1,8 +1,8 @@
-var leveldb = require('./')
+var levelup = require('./')
   , rimraf = require('rimraf')
   , location = require('path').join(require('os').tmpDir(), 'prefixed1.db')
 
-    // the externs plugin to send to leveldb's `use`
+    // the externs plugin to send to levelup's `use`
   , pfxextern = function (pfx) {
       return {
           inKey: function (key) {
@@ -16,20 +16,20 @@ var leveldb = require('./')
 
     // a plugin that messes with the `put` method to drop a particular key
   , sneakyextern = {
-        put: function (key, options, valueEnc, callback, next) {
+        put: function (key, value, options, callback) {
           if (key == 'foo2') {
             // bypass the real get() operation, jump straight to the user callback
             return callback()
           }
           // internal next() callback for the extern chain
-          next(key, options, valueEnc, callback)
+          next(key, options, value, callback)
         }
     }
 
     // put keys to a database, using the provided `use`
   , put = function (use, callback) {
       rimraf(location, function () {
-        var db = leveldb(location, { use: use })
+        var db = levelup(location, { use: use })
         db.put('foo1', 'bar2', function () {
           db.put('foo2', 'bar2', function () {
             db.put('foo3', 'bar3', function () {
@@ -42,7 +42,7 @@ var leveldb = require('./')
 
     // print key/value pairs from the database using the provided `use
   , print = function (use, callback) {
-      var db = leveldb(location, { use: use })
+      var db = levelup(location, { use: use })
       db.readStream()
         .on('data', console.log.bind(console, '\t'))
         .on('close', function () {
