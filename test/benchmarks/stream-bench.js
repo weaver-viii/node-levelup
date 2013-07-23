@@ -34,13 +34,18 @@ srcdb.on('ready', function () {
 
     start = Date.now()
     var ws = dstdb.createWriteStream()
-    ws.on('close', function () {
+    ws.once('close', function () {
       var copyTime = Date.now() - start
       console.log('Done! Took', copyTime + 'ms,', Math.round((copyTime / batchTime) * 100) + '% of batch time')
     })
 
-    srcdb.createReadStream().pipe(ws)
+    var rs = srcdb.createReadStream()
+    rs.once('end', function() {
+      var readTime = Date.now() - start
+      console.log('Reading took', readTime + 'ms,')
+    })
 
+    rs.pipe(ws)
 
   })
 })
