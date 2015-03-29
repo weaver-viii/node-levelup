@@ -37,9 +37,11 @@
     "deferred-leveldown": "git://github.com/Level/deferred-leveldown#add/iterators",
     "level-codec": "^5.0.0",
     "level-errors": "~1.0.3",
+    "level-iterator-stream": "^1.1.0",
     "prr": "~0.0.0",
     "readable-stream": "~1.0.26",
     "semver": "~2.3.1",
+    "through2": "^0.6.3",
     "xtend": "~3.0.0"
   },
   "devDependencies": {

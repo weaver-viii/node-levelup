@@ -145,8 +145,9 @@ buster.testCase('ReadStream', {
             , endSpy = this.spy()
             , calls = 0
           this.dataSpy = this.spy(function () {
-            if (++calls == 5)
+            if (++calls == 5) {
               rs.destroy()
+            }
           })
           rs.on('data' , this.dataSpy)
           rs.on('end'  , endSpy)
